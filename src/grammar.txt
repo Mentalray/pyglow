@@ -1,0 +1,14 @@
+prod        ::= nonterm "::=" alt
+alt         ::= def_seq ( '|' def_seq )*
+def_seq     ::= def def*
+def         ::= ( group mul? ) | ( val mul? )
+group       ::= '(' alt ')'
+val         ::= known | term | nonterm
+mul         ::= '*' | '+' | '?'
+known       ::= '<' str '>'
+term        ::= quoted_str
+nonterm     ::= str
+quoted_str  ::= delim str delim
+str         ::= <alnum>+
+delim       ::= '"' | "'"
+
